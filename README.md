@@ -12,7 +12,7 @@
     </ul>
   <li>Terrance
     <ul>
-      <li> <a href="https://github.com/JScrips">GitHub</a>
+      <li> <a href="https://github.com/JScrips">GitHub</a></li>
       <li> <a href="https://www.linkedin.com/in/jscrips/">LinkedIn</a>
     </ul> 
   <li>Greg
@@ -39,7 +39,7 @@
 
 _Our Awesome Project_ was created by a group of engineers at #100Devs. This full-stack application will return a recipe, instructions, cook time, and images of food based on the entries.
 
-![Our Awesome Food App](/images/FoodApp.PNG)
+![Our Awesome Food App](/images/app.PNG)
 
 **Link to project:** http://our-awesome-food-app-.pending/
 
