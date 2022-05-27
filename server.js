@@ -14,16 +14,16 @@ const recipes = require('./recipes.json')
 //     }
 //     res.end(JSON.stringify(objToJson));
 // }
- 
+
 // console.log(fs.readFile('recipes.json', 'utf8', (err, data) => { console.log(data) })); '))
 
 const server = http.createServer((req, res) => {
     const page = url.parse(req.url).pathname;
     const params = querystring.parse(url.parse(req.url).query);
-    console.log(page);
 
     const getRecipe = (recipeName) => {
-        let recipe = recipes.filter(e => e.name === recipeName)
+        let recipe = recipes.filter(e => e.name.toLowerCase() === recipeName.toLowerCase())
+        console.log('recipe', recipe)
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(recipe));
     }
@@ -37,7 +37,7 @@ const server = http.createServer((req, res) => {
     }
     else if (page == '/api') {
         if ('food' in params) {
-            console.log(params.food)
+            console.log('food name: ', params.food)
             getRecipe(params.food)
             // if (params['food'] == 'spaghetti') {
             //   res.writeHead(200, {'Content-Type': 'application/json'});
@@ -46,7 +46,7 @@ const server = http.createServer((req, res) => {
             //     ingredients: ['noodles', 'tomato sauce', 'cheese'],
             //     instructions: 'boil noodles, add tomato sauce, add cheese, cook for 20 minutes'
             //   }
-                
+
             // }//student = leon
             // else if (params['student'] != 'leon') {
             //     res.writeHead(200, { 'Content-Type': 'application/json' });

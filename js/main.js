@@ -1,19 +1,52 @@
-document.querySelector('#clickMe').addEventListener('click', makeReq)
+const getRecipe = (data) => {
+    foodName.textContent = data.name
 
-async function makeReq(){
+    // document.querySelector('#foodSteps').textContent =
+    data.steps.forEach((step) => {
+        const li = document.createElement('li')
 
-  const foodName = document.querySelector("#food").value;
-  const res = await fetch(`/api?food=${foodName}`)
-  const data = await res.json()
+        li.textContent = step
+        document.querySelector('#foodSteps').appendChild(li)
+    })
+    const timeEstimate =  document.querySelector('#timeEstimate')
+    timeEstimate.textContent = "Estimated prep time: " + data.timers.reduce((a, b) => a + b) + " minutes"
 
-  console.log('data', data);
-  document.querySelector("#foodName").textContent = data.name
-  document.querySelector("#foodRecipe").textContent = data.ingredients.forEach()
-  document.querySelector('#foodSteps')= data.steps
-  document.querySelector('#foodTimers')  =data.timers
-  document.querySelector('#foodImg') =data.imageURL
-  document.querySelector('#foodURL') =data.originalURL
-  document.querySelector("#foodInstructions").textContent = data.currentOccupation
+    document.querySelector('#foodImg').src = data.imageURL
+    document.querySelector('#foodURL').textContent = data.originalURL
+
+    data.ingredients.forEach(data => {
+        const items = document.createElement('li');
+        items.textContent = `${data.quantity} of ${data.name} `
+        document.querySelector('#foodInstructions').appendChild(items)
+    })
 }
 
-recipes.forEach
+const clearAll = () => {
+    document.querySelector('#foodName').textContent = ''
+    document.querySelector('#foodSteps').innerHTML = ''
+    document.querySelector('#foodImg').src = ''
+    document.querySelector('#foodURL').textContent = ''
+    document.querySelector('#foodInstructions').innerHTML = ''
+    document.querySelector('#timeEstimate').textContent = ''
+}
+
+
+const makeReq = async () => {
+    const foodName = document.querySelector("#food").value;
+    const res = await fetch(`/api?food=${foodName}`)
+    const prelimData = await res.json();
+    const data = prelimData[0]
+
+    if (data !== foodName) {
+        getRecipe(data)
+    } else if (data === foodName) {
+        alert('Already showing this recipe')
+    } else {
+        clearAll();
+        document.querySelector('#foodName').textContent = "I don't know how to make that"
+    }
+}
+
+document.querySelector('#clickMe').addEventListener('click', makeReq)
+document.querySelector('#clearMe').addEventListener('click', clearAll)
+
