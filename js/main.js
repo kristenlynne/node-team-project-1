@@ -1,7 +1,7 @@
 const getRecipe = (data) => {
-    foodName.textContent = data.name
+    
 
-    // document.querySelector('#foodSteps').textContent =
+    document.querySelector('#foodSteps').textContent =
     data.steps.forEach((step) => {
         const li = document.createElement('li')
 
@@ -36,15 +36,28 @@ const makeReq = async () => {
     const res = await fetch(`/api?food=${foodName}`)
     const prelimData = await res.json();
     const data = prelimData[0]
-
-    if (data !== foodName) {
+    const currentItem = document.querySelector("#food").innerHTML
+    console.log(data.name)
+    console.log(foodName)
+    
+    
+    if (data.name === foodName) {
         getRecipe(data)
-    } else if (data === foodName) {
-        alert('Already showing this recipe')
     } else {
-        clearAll();
-        document.querySelector('#foodName').textContent = "I don't know how to make that"
+        document.querySelector('#foodName').textContent="Sorry, we don't have that recipe"
     }
+
+
+
+    // if (!data) {
+    //     clearAll();
+    //     document.querySelector('#foodName').textContent = "I don't know how to make that"
+    // }
+    // else if (currentItem !== foodName) {
+    //     getRecipe(data)
+    // } else if (data.name === foodName) {
+    //     console.log('Already showing this recipe')
+    // }
 }
 
 document.querySelector('#clickMe').addEventListener('click', makeReq)
