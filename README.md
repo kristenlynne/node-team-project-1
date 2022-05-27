@@ -12,6 +12,7 @@
     </ul>
   <li>Terrance
     <ul>
+      <li> <a href="https://github.com/JScrips">GitHub</a></li>
       <li> <a href="https://www.linkedin.com/in/jscrips/">LinkedIn</a>
     </ul> 
   <li>Greg
