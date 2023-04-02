@@ -30,36 +30,32 @@ const clearAll = () => {
     document.querySelector('#timeEstimate').textContent = ''
 }
 
-
 const makeReq = async () => {
     const foodName = document.querySelector("#food").value;
     const res = await fetch(`/api?food=${foodName}`)
     const prelimData = await res.json();
+
+    // prelimData was returning empty array for searches that weren't in the database.
+    // had to add conditional to check if prelimData.length === 0 (empty array) then return message that we don't have that recipe.
+    if (prelimData.length === 0) {
+        document.querySelector('#foodName').textContent="Sorry, we don't have that recipe";
+        console.log("No recipe found for:", foodName);
+        return;
+    }
+
     const data = prelimData[0]
-    const currentItem = document.querySelector("#food").innerHTML
-    console.log(data.name)
-    console.log(foodName)
-    
+    // const currentItem = document.querySelector("#food").innerHTML
+    console.log('prelimData', prelimData)
+    console.log('data', data)
+    console.log('data.name', data.name)
+    console.log('foodName', foodName)
     
     if (data.name.toLowerCase() === foodName.toLowerCase()) {
         getRecipe(data)
     } else {
         document.querySelector('#foodName').textContent="Sorry, we don't have that recipe"
     }
-
-
-
-    // if (!data) {
-    //     clearAll();
-    //     document.querySelector('#foodName').textContent = "I don't know how to make that"
-    // }
-    // else if (currentItem !== foodName) {
-    //     getRecipe(data)
-    // } else if (data.name === foodName) {
-    //     console.log('Already showing this recipe')
-    // }
 }
 
 document.querySelector('#clickMe').addEventListener('click', makeReq)
 document.querySelector('#clearMe').addEventListener('click', clearAll)
-

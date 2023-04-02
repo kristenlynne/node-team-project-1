@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
 
     const getRecipe = (recipeName) => {
         let recipe = recipes.filter(e => e.name.toLowerCase() === recipeName.toLowerCase())
-        console.log('recipe', recipe)
+        console.log('recipe:', recipe)
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(recipe));
     }
