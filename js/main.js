@@ -1,6 +1,5 @@
 const getRecipe = (data) => {
     
-
     document.querySelector('#foodSteps').textContent =
     data.steps.forEach((step) => {
         const li = document.createElement('li')
@@ -41,7 +40,7 @@ const makeReq = async () => {
     console.log(foodName)
     
     
-    if (data.name === foodName) {
+    if (data.name.toLowerCase() === foodName.toLowerCase()) {
         getRecipe(data)
     } else {
         document.querySelector('#foodName').textContent="Sorry, we don't have that recipe"
