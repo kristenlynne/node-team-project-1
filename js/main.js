@@ -21,6 +21,7 @@ const getRecipe = (data) => {
 }
 
 const clearAll = () => {
+    document.querySelector('#food').value = ''
     document.querySelector('#foodName').textContent = ''
     document.querySelector('#foodSteps').innerHTML = ''
     document.querySelector('#foodImg').src = ''
