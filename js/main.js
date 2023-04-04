@@ -1,17 +1,18 @@
 const getRecipe = (data) => {
     
-    document.querySelector('#foodSteps').textContent =
-    data.steps.forEach((step) => {
-        const li = document.createElement('li')
+    data.steps.forEach(data => {
+        const steps = document.createElement('li');
+        steps.textContent = `${data}`;
+        document.querySelector('#foodSteps').appendChild(steps);
+        console.log(data);
+    });
 
-        li.textContent = step
-        document.querySelector('#foodSteps').appendChild(li)
-    })
     const timeEstimate =  document.querySelector('#timeEstimate')
     timeEstimate.textContent = "Estimated prep time: " + data.timers.reduce((a, b) => a + b) + " minutes"
 
     document.querySelector('#foodImg').src = data.imageURL
     document.querySelector('#foodURL').textContent = data.originalURL
+    document.querySelector('#foodName').textContent = data.name
 
     data.ingredients.forEach(data => {
         const items = document.createElement('li');
