@@ -10,8 +10,13 @@ const getRecipe = (data) => {
     const timeEstimate =  document.querySelector('#timeEstimate')
     timeEstimate.textContent = "Estimated prep time: " + data.timers.reduce((a, b) => a + b) + " minutes"
 
+    if (data.originalURL) {
+        const link = document.querySelector('#foodURL')
+        link.href = data.originalURL
+        link.textContent = 'Recipe Link'
+    }
+
     document.querySelector('#foodImg').src = data.imageURL
-    document.querySelector('#foodURL').textContent = data.originalURL
     document.querySelector('#foodName').textContent = data.name
 
     data.ingredients.forEach(data => {
