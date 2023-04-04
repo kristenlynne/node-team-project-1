@@ -59,4 +59,5 @@ const makeReq = async () => {
 }
 
 document.querySelector('#clickMe').addEventListener('click', makeReq)
+document.querySelector('#clickMe').addEventListener('click', clearAll)
 document.querySelector('#clearMe').addEventListener('click', clearAll)
