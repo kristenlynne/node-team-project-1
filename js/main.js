@@ -63,6 +63,28 @@ const makeReq = async () => {
     }
 }
 
+
+const appendRecipes = async () => {
+    try {
+        const res = await fetch('/api')
+        const recipes = await res.json();
+        console.log(recipes)
+
+        const recipeList = document.querySelector('#recipes');
+        recipes.forEach((recipe) => {
+            const option = document.createElement('option');
+            option.value = recipe.name;
+            option.textContent = recipe.name;
+            recipeList.appendChild(option);
+        }); 
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+document.addEventListener('DOMContentLoaded', appendRecipes);
+
+
 document.querySelector('#clickMe').addEventListener('click', makeReq)
 document.querySelector('#clickMe').addEventListener('click', clearAll)
 document.querySelector('#clearMe').addEventListener('click', clearAll)

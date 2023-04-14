@@ -5,18 +5,6 @@ const querystring = require('querystring');
 const figlet = require('figlet')
 const recipes = require('./recipes.json')
 
-// const apiCall = (_recipeName, _ingredients, _instructions) => {
-//     res.writeHead(200, { 'Content-Type': 'application/json' });
-//     const objToJson = {
-//         recipeName: _recipeName,
-//         ingredients: _ingredients,
-//         instructions: _instructions
-//     }
-//     res.end(JSON.stringify(objToJson));
-// }
-
-// console.log(fs.readFile('recipes.json', 'utf8', (err, data) => { console.log(data) })); '))
-
 const server = http.createServer((req, res) => {
     const page = url.parse(req.url).pathname;
     const params = querystring.parse(url.parse(req.url).query);
@@ -39,26 +27,20 @@ const server = http.createServer((req, res) => {
         if ('food' in params) {
             console.log('food name: ', params.food)
             getRecipe(params.food)
-            // if (params['food'] == 'spaghetti') {
-            //   res.writeHead(200, {'Content-Type': 'application/json'});
-            //   const objToJson = {
-            //     name: 'spaghetti',
-            //     ingredients: ['noodles', 'tomato sauce', 'cheese'],
-            //     instructions: 'boil noodles, add tomato sauce, add cheese, cook for 20 minutes'
-            //   }
-
-            // }//student = leon
-            // else if (params['student'] != 'leon') {
-            //     res.writeHead(200, { 'Content-Type': 'application/json' });
-            //     const objToJson = {
-            //         name: "unknown",
-            //         status: "unknown",
-            //         currentOccupation: "unknown"
-            //     }
-            //     res.end(JSON.stringify(objToJson));
-            // }//student != leon
-        }//food if
-    }//else if
+        } else {
+            fs.readFile('recipes.json', (err, data) => {
+                if (err) {
+                    console.error(err);
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                } else {
+                    const recipes = JSON.parse(data);
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify(recipes))
+                }
+            })
+        }
+    }
     else if (page == '/css/style.css') {
         fs.readFile('css/style.css', function (err, data) {
             res.write(data);
