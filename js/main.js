@@ -32,10 +32,10 @@ const getRecipe = (data) => {
         }
       }
 
-const timeEstimate = document.querySelector('#timeEstimate');
-const recipeTimeInMinutes = data.timers.reduce((a, b) => a + b);
-const formattedTime = convertToHoursAndMinutes(recipeTimeInMinutes);
-timeEstimate.textContent = "Estimated prep time: " + formattedTime;
+    const timeEstimate = document.querySelector('#timeEstimate');
+    const recipeTimeInMinutes = data.timers.reduce((a, b) => a + b);
+    const formattedTime = convertToHoursAndMinutes(recipeTimeInMinutes);
+    timeEstimate.textContent = "Estimated prep time: " + formattedTime;
 
 
     if (data.originalURL) {
@@ -115,6 +115,15 @@ const appendRecipes = async () => {
 
 document.addEventListener('DOMContentLoaded', appendRecipes);
 
+
+const input = document.querySelector('#food');
+
+input.addEventListener('keydown', function(event) {
+    if (event.keyCode === 13) {
+        makeReq()
+        event.preventDefault()
+    }
+})
 
 document.querySelector('#clickMe').addEventListener('click', makeReq)
 document.querySelector('#clickMe').addEventListener('click', clearAll)
