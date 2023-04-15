@@ -4,11 +4,39 @@ const getRecipe = (data) => {
         const steps = document.createElement('li');
         steps.textContent = `${data}`;
         document.querySelector('#foodSteps').appendChild(steps);
+        document.querySelector('.instructions').textContent = 'Instructions'
         console.log(data);
     });
 
-    const timeEstimate =  document.querySelector('#timeEstimate')
-    timeEstimate.textContent = "Estimated prep time: " + data.timers.reduce((a, b) => a + b) + " minutes"
+    // const timeEstimate =  document.querySelector('#timeEstimate')
+    // timeEstimate.textContent = "Estimated prep time: " + data.timers.reduce((a, b) => a + b) + " minutes"
+
+    function convertToHoursAndMinutes(minutes) {
+        const hours = Math.floor(minutes / 60);
+        const remainingMinutes = minutes % 60;
+        
+        if (hours === 0) {
+          return `${remainingMinutes} minutes`;
+        } else if (hours === 1) {
+          if (remainingMinutes === 0) {
+            return `1 hour`;
+          } else {
+            return `1 hour and ${remainingMinutes} minutes`;
+          }
+        } else {
+          if (remainingMinutes === 0) {
+            return `${hours} hours`;
+          } else {
+            return `${hours} hours and ${remainingMinutes} minutes`;
+          }
+        }
+      }
+
+const timeEstimate = document.querySelector('#timeEstimate');
+const recipeTimeInMinutes = data.timers.reduce((a, b) => a + b);
+const formattedTime = convertToHoursAndMinutes(recipeTimeInMinutes);
+timeEstimate.textContent = "Estimated prep time: " + formattedTime;
+
 
     if (data.originalURL) {
         const link = document.querySelector('#foodURL')
@@ -23,6 +51,7 @@ const getRecipe = (data) => {
         const items = document.createElement('li');
         items.textContent = `${data.quantity} of ${data.name} `
         document.querySelector('#foodInstructions').appendChild(items)
+        document.querySelector('.ingredients').textContent = 'Ingredients'
     })
 }
 
@@ -34,6 +63,8 @@ const clearAll = () => {
     document.querySelector('#foodURL').textContent = ''
     document.querySelector('#foodInstructions').innerHTML = ''
     document.querySelector('#timeEstimate').textContent = ''
+    document.querySelector('.ingredients').textContent = ''
+    document.querySelector('.instructions').textContent = ''
 }
 
 const makeReq = async () => {
@@ -51,10 +82,10 @@ const makeReq = async () => {
 
     const data = prelimData[0]
     // const currentItem = document.querySelector("#food").innerHTML
-    console.log('prelimData', prelimData)
-    console.log('data', data)
-    console.log('data.name', data.name)
-    console.log('foodName', foodName)
+    // console.log('prelimData', prelimData)
+    // console.log('data', data)
+    // console.log('data.name', data.name)
+    // console.log('foodName', foodName)
     
     if (data.name.toLowerCase() === foodName.toLowerCase()) {
         getRecipe(data)
