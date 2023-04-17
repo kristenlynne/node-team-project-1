@@ -3,7 +3,7 @@
         "name": "Crock Pot Roast",
         "ingredients": [
             {
-                "quantity": "1",
+                "quantity": "1 lb",
                 "name": "beef roast",
                 "type": "Meat"
             },
@@ -40,7 +40,7 @@
             0,
             420
         ],
-        "imageURL": "http://img.sndimg.com/food/image/upload/w_266/v1/img/recipes/27/20/8/picVfzLZo.jpg",
+        "imageURL": "https://thecookful.com/wp-content/uploads/2019/10/Instant-Pot-Beef-Pot-Casserole-Landscape-1200x628.jpg",
         "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
     },
     {
@@ -196,7 +196,7 @@
             15,
             0
         ],
-        "imageURL": "http://upload.wikimedia.org/wikipedia/commons/c/c7/Spinach_pizza.jpg"
+        "imageURL": "https://www.southernliving.com/thmb/SUC7jw5joHEfiCpk3Hf0wOyoT3U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/BBQ-Chicken-Pizza_WD0151-S-256b0bd90b294badb343211b3310160b.jpg"
     },
     {
         "name": "Cranberry and Apple Stuffed Acorn Squash Recipe",
@@ -473,7 +473,7 @@
         "originalURL": "http://www.canadianliving.com/food/blueberry_oatmeal_squares.php"
     },
     {
-        "name": "Curried chicken salad",
+        "name": "Curried Chicken Salad",
         "ingredients": [
             {
                 "quantity": "3",
