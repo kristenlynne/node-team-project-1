@@ -4,6 +4,7 @@ const url = require('url');
 const querystring = require('querystring');
 const figlet = require('figlet')
 const recipes = require('./recipes.json')
+const PORT = 3000
 
 const server = http.createServer((req, res) => {
     const page = url.parse(req.url).pathname;
@@ -65,4 +66,8 @@ const server = http.createServer((req, res) => {
     }
 });
 
-server.listen(3000);
+// server.listen(3000);
+
+server.listen(process.env.PORT || PORT, () => {
+    console.log(`The server is running on port ${PORT}`)
+})
