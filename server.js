@@ -44,10 +44,17 @@ const server = http.createServer((req, res) => {
     }
     else if (page == '/css/style.css') {
         fs.readFile('css/style.css', function (err, data) {
+          if (err) {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Error loading CSS file');
+          } else {
+            res.writeHead(200, { 'Content-Type': 'text/css' });
             res.write(data);
             res.end();
+          }
         });
-    } else if (page == '/js/main.js') {
+      }
+     else if (page == '/js/main.js') {
         fs.readFile('js/main.js', function (err, data) {
             res.writeHead(200, { 'Content-Type': 'text/javascript' });
             res.write(data);
